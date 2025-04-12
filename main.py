@@ -87,8 +87,26 @@ def del_teg():
             ui.tag_list.addItems(note["теги"])
 ui.del_tag.clicked.connect(del_teg)
 
+def search_teg():
+    if ui.search_btb.text() == "шук нот по тегу":
+        tag = ui.tag_input.text()
+        filtered_notes = []
+        for note_name, note in NOTES.items():
+            if tag in note["теги"]:
+                filtered_notes.append(note_name)
+        ui.notest_list.clear()
+        ui.notest_list.addItems(filtered_notes)
+        
+        ui.search_btb.setText("скинути пошук")
+    elif ui.search_btb.text() == "скинути пошук":
+        ui.tag_input.clear()
+        ui.notest_list.clear()
+        ui.notest_list.addItems(NOTES)
+        
 
+        ui.search_btb.setText("шук нот по тегу")
 
-
+ui.search_btb.clicked.connect(search_teg)
+print("102910445463374")
 win.show()
 app.exec()
